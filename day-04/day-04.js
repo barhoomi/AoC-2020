@@ -1,7 +1,6 @@
 const fs = require('fs');
 let input = fs.readFileSync('day-04.txt').toString('utf-8').split('\n');
-let output = [""];
-let [ans1,ans2]=[0,0];
+let [ans1,ans2,output]=[0,0,[""]];
 
 const check1 = [/byr/g,/iyr/g,/eyr/g,/hgt/g,/hcl/g,/ecl/g,/pid/g];
 const check2 = [
@@ -15,22 +14,20 @@ const check2 = [
 ]
 
 let n = 0;
-input.forEach(x=>{
-    n+=(x==0); 
-    x==0?output[n] = "":output[n] += " " + x;
+input.forEach(i=>{
+    n+=(i==0); 
+    i==0?output[n] = "":output[n] += " " + i;
 })
 
-for(i=0;i<output.length;i++){
+output.forEach(o=>{
     let [total1,total2] = [0,0];
-    for(j=0;j<check1.length;j++){
-        total1+=(output[i].match(check1[j])!==null)
-    }
-    for(j=0;j<check2.length;j++){
-        total2+=(output[i].match(check2[j])!==null)
+    for(j=0;j<7;j++){
+        total1+=(o.match(check1[j])!==null)
+        total2+=(o.match(check2[j])!==null)
     }
     total1==7?ans1++:0;
     total2==7?ans2++:0;
-}
+})
 
-console.log("part 1:",ans1);
-console.log("part 2:",ans2);
+console.log("part 1:",ans1); //250
+console.log("part 2:",ans2); //158
