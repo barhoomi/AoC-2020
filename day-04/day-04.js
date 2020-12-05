@@ -1,6 +1,6 @@
 const fs = require('fs');
-let input = fs.readFileSync('day-04.txt').toString('utf-8').split('\n');
-let [ans1,ans2,output]=[0,0,[""]];
+let input = fs.readFileSync('day-04.txt').toString('utf-8').split(/\n/).join(" ").split(/\s\s/);
+let [ans1,ans2]=[0,0];
 
 const check1 = [/byr/g,/iyr/g,/eyr/g,/hgt/g,/hcl/g,/ecl/g,/pid/g];
 const check2 = [
@@ -13,13 +13,7 @@ const check2 = [
     /pid:\d{9}(\s|\n|$)/g
 ]
 
-let n = 0;
-input.forEach(i=>{
-    n+=(i==0); 
-    i==0?output[n] = "":output[n] += " " + i;
-})
-
-output.forEach(o=>{
+input.forEach(o=>{
     let [total1,total2] = [0,0];
     for(j=0;j<7;j++){
         total1+=(o.match(check1[j])!==null)
